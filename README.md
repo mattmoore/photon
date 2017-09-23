@@ -13,6 +13,24 @@ brew tap mattmoore/brew https://github.com/mattmoore/homebrew-formulas
 brew install photon
 ```
 
+### Arch Linux
+
+A package is available in the AUR. It can be installed with Yaourt:
+
+```shell
+yaourt -S photon
+```
+
+Or, you can install it the old-fashioned way without Yaourt:
+
+```shell
+curl -LO https://aur.archlinux.org/cgit/aur.git/snapshot/photon.tar.gz
+tar xf photon.tar.gz
+cd photon
+makepkg
+sudo pacman -U photon-0.1.0-1-x86_64.pkg.tar.xz
+```
+
 ### Ubuntu/Debian
 
 PPAs are currently a bit of a hassle for distributing programs written in Haskell. For now, I'm just distributing it as a pre-built binary via GitHub. You can install on Ubuntu with:
