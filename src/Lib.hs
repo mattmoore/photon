@@ -61,7 +61,7 @@ parseHeaders :: [String] -> [HTypes.Header]
 parseHeaders x = map parseHeader (parseList "-H" x)
 
 formatRFC1123 :: UTCTime -> T.Text
-formatRFC1123 = T.pack . formatTime defaultTimeLocale "%a, %d %b %Y %X %Z"
+formatRFC1123 = T.pack . formatTime defaultTimeLocale "%a, %d %b %Y %X GMT"
 
 httpTime :: UTCTime -> String
 httpTime x = T.unpack $ formatRFC1123 x
