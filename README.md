@@ -37,8 +37,8 @@ PPAs are currently a bit of a hassle for distributing programs written in Haskel
 
 ```shell
 # Install
-curl -LO https://github.com/mattmoore/photon/releases/download/0.1.2/photon_0.1.2-1_amd64.deb
-sudo dpkg -i photon_0.1.2-1_amd64.deb
+curl -LO https://github.com/mattmoore/photon/releases/download/0.1.2/photon_0.1.2-2_amd64.deb
+sudo dpkg -i photon_0.1.2-2_amd64.deb
 
 # Uninstall
 sudo dpkg -r photon
