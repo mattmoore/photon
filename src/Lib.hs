@@ -1,7 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Lib
-    ( parse
+    ( version
+    , parse
     , parseBool
     , parseList
     , parseArgsUrl
@@ -28,6 +29,10 @@ import           Data.Time
 import           Network.HTTP.Simple
 import           Network.HTTP.Types.Header  as HTypes
 import           Network.HTTP.Types.URI     as URITypes
+
+version = "photon 0.1.2\n"
+       ++ "Protocols: http https\n"
+       ++ "Features: Api-Auth SSL"
 
 parse :: String -> [String] -> String
 parse key args
