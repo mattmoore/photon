@@ -30,7 +30,7 @@ import           Network.HTTP.Simple
 import           Network.HTTP.Types.Header  as HTypes
 import           Network.HTTP.Types.URI     as URITypes
 
-version = "photon 0.1.2\n"
+version = "photon 0.1.3\n"
        ++ "Protocols: http https\n"
        ++ "Features: Api-Auth SSL"
 
@@ -80,7 +80,11 @@ emptyMD5 = "1B2M2Y8AsgTpgAmY7PhCfg=="
 contentMD5 :: String -> String
 contentMD5 x
   | x == ""   = emptyMD5
-  | otherwise = B8.unpack $ md5DigestBytes $ md5 $ BL8.pack x
+  | otherwise = B8.unpack
+              $ Base64.encode
+              $ md5DigestBytes
+              $ md5
+              $ BL8.pack x
 
 findHeader :: String -> [Header] -> String
 findHeader headerName headers = value
