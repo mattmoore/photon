@@ -16,6 +16,7 @@ import           Data.Aeson.Encode.Pretty
 import qualified Data.ByteString.Base64     as Base64
 import qualified Data.ByteString.Char8      as B8
 import qualified Data.ByteString.Lazy.Char8 as BL8
+import qualified Data.ByteString.UTF8       as BU
 import qualified Data.CaseInsensitive       as CI
 import           Data.Digest.Pure.SHA
 import           Data.Digest.Pure.MD5
@@ -30,7 +31,7 @@ import           Network.HTTP.Simple
 import           Network.HTTP.Types.Header  as HTypes
 import           Network.HTTP.Types.URI     as URITypes
 
-version = "photon 0.1.3\n"
+version = "photon 0.1.4\n"
        ++ "Protocols: http https\n"
        ++ "Features: Api-Auth SSL"
 
@@ -156,4 +157,4 @@ fetchHttp method url' client key headers body' pretty = do
       result       | pretty == True = ppJson
                    | otherwise      = responseBody
 
-  return $ BL8.unpack result
+  return $ BU.toString $ BL8.toStrict result
