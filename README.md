@@ -28,7 +28,7 @@ curl -LO https://aur.archlinux.org/cgit/aur.git/snapshot/photon.tar.gz
 tar xf photon.tar.gz
 cd photon
 makepkg
-sudo pacman -U photon-0.1.4-1-x86_64.pkg.tar.xz
+sudo pacman -U photon-0.1.5-1-x86_64.pkg.tar.xz
 ```
 
 ### Ubuntu/Debian
@@ -37,8 +37,8 @@ To install the standard Debian package locally:
 
 ```shell
 # Install
-curl -LO https://github.com/mattmoore/photon/releases/download/0.1.4/photon_0.1.4-1_amd64.deb
-sudo dpkg -i photon_0.1.4-1_amd64.deb
+curl -LO https://github.com/mattmoore/photon/releases/download/0.1.5/photon_0.1.5-1_amd64.deb
+sudo dpkg -i photon_0.1.5-1_amd64.deb
 
 # Uninstall
 sudo dpkg -r photon
@@ -50,17 +50,17 @@ Eventually, I plan to investigate the PPA issues and use that instead.
 
 ```shell
 # Download the same RPM for Fedora or openSUSE
-curl -LO https://github.com/mattmoore/photon/releases/download/0.1.4/photon-0.1.4-1.fc26.x86_64.rpm
+curl -LO https://github.com/mattmoore/photon/releases/download/0.1.5/photon-0.1.5-1.fc26.x86_64.rpm
 
 ## Fedora
 # Install
-sudo dnf install -y photon-0.1.4-1.fc26.x86_64.rpm
+sudo dnf install -y photon-0.1.5-1.fc26.x86_64.rpm
 # Uninstall
 sudo dnf remove -y photon
 
 ## openSUSE
 # Install
-sudo zypper in ./photon-0.1.4-1.fc26.x86_64.rpm
+sudo zypper in ./photon-0.1.5-1.fc26.x86_64.rpm
 # Uninstall
 sudo zypper remove photon
 ```

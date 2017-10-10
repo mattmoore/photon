@@ -31,7 +31,7 @@ import           Network.HTTP.Simple
 import           Network.HTTP.Types.Header  as HTypes
 import           Network.HTTP.Types.URI     as URITypes
 
-version = "photon 0.1.4\n"
+version = "photon 0.1.5\n"
        ++ "Protocols: http https\n"
        ++ "Features: Api-Auth SSL"
 
