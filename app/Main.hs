@@ -2,7 +2,7 @@
 
 module Main where
 
-import Lib
+import Photon
 import Data.String.Utils
 import System.Environment
 import System.Exit
@@ -16,7 +16,7 @@ main = do
 validate x
   | length x < 1              = Just "You didn't provide any arguments. Try: photon [URL]"
   | (parseBool "--help" x)    = Just help
-  | (parseBool "--version" x) = Just version
+  | (parseBool "--version" x) = Just versionInfo
   | startswith "-" (last x)   = Just ("\"" ++ (last x) ++ "\" is invalid. The last argument must be a URL.")
   | otherwise                 = Nothing
 
