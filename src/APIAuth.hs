@@ -17,8 +17,8 @@ getPath x = B8.unpack . URITypes.extractPath $ B8.pack x
 emptyMD5 :: String
 emptyMD5 = "1B2M2Y8AsgTpgAmY7PhCfg=="
 
-contentMD5 :: String -> String
-contentMD5 x
+md5Digest :: String -> String
+md5Digest x
   | x == ""   = emptyMD5
   | otherwise = B8.unpack
               . Base64.encode
