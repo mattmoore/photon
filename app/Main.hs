@@ -31,7 +31,7 @@ processRequest args = do
       body    = parse "-d"           args
       pretty  = parseBool "--pretty" args
 
-  response <- fetchHttp method url client key headers body pretty
+  response <- send method url client key headers body pretty
   putStrLn response
 
 help = "Usage: photon [args] [URL]\n"
