@@ -10,11 +10,11 @@ module CommandParsing (
   findHeader
 ) where
 
-import qualified Data.ByteString.Char8     as B8
-import qualified Data.CaseInsensitive      as CI
-import           Data.List
-import           Data.String.Utils
-import           Network.HTTP.Types.Header as HTypes
+import qualified Data.ByteString.Char8     as B8     (pack, unpack)
+import qualified Data.CaseInsensitive      as CI     (mk)
+import           Data.List                           (find)
+import qualified Data.Text                 as T      (pack, unpack, strip, dropWhile)
+import           Network.HTTP.Types.Header as HTypes (Header, HeaderName)
 
 parse :: String -> [String] -> String
 parse key args
@@ -40,7 +40,10 @@ parseHeader x = (hHdrCustom, value)
     name = takeWhile (/= ':') x
     hHdrCustom :: HTypes.HeaderName
     hHdrCustom = CI.mk . B8.pack $ name
-    value = B8.pack . strip $ dropWhile (== ':') (dropWhile (/= ':') x)
+    value = B8.pack
+          . T.unpack
+          . T.strip
+          $ T.dropWhile (== ':') (T.dropWhile (/= ':') (T.pack x))
 
 parseHeaders :: [String] -> [HTypes.Header]
 parseHeaders x = map parseHeader (parseList "-H" x)

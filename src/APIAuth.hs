@@ -2,14 +2,14 @@
 
 module APIAuth where
 
-import qualified Data.ByteString.Base64     as Base64
-import qualified Data.ByteString.Char8      as B8
-import qualified Data.ByteString.Lazy.Char8 as BL8
-import           Data.Digest.Pure.SHA
-import           Data.Digest.Pure.MD5
-import           Data.List
-import           Network.HTTP.Types.Header  as HTypes
-import           Network.HTTP.Types.URI     as URITypes
+import qualified Data.ByteString.Base64     as Base64   (encode)
+import qualified Data.ByteString.Char8      as B8       (pack, unpack)
+import qualified Data.ByteString.Lazy.Char8 as BL8      (pack, unpack, toStrict, fromStrict)
+import           Data.Digest.Pure.SHA                   (hmacSha1, bytestringDigest)
+import           Data.Digest.Pure.MD5                   (md5, md5DigestBytes)
+import           Data.List                              (intercalate)
+import           Network.HTTP.Types.Header  as HTypes   (Header, hAuthorization)
+import           Network.HTTP.Types.URI     as URITypes (extractPath)
 
 getPath :: String -> String
 getPath x = B8.unpack . URITypes.extractPath $ B8.pack x

@@ -12,18 +12,23 @@ module Photon (
   send
 ) where
 
-import           Data.Version (showVersion)
-import           Paths_photon (version)
-import           Data.Aeson
-import           Data.Aeson.Encode.Pretty
-import qualified Data.ByteString.Char8      as B8
-import qualified Data.ByteString.Lazy.Char8 as BL8
-import qualified Data.ByteString.UTF8       as BU
-import           Data.List
-import           Data.String.Utils
-import           Data.Time
-import           Network.HTTP.Simple
-import           Network.HTTP.Types.Header  as HTypes
+import           Data.Version                         (showVersion)
+import           Paths_photon                         (version)
+import           Data.Aeson                           (decode, Value)
+import           Data.Aeson.Encode.Pretty             (encodePretty)
+import qualified Data.ByteString.Char8      as B8     (pack)
+import qualified Data.ByteString.Lazy.Char8 as BL8    (pack, toStrict)
+import qualified Data.ByteString.UTF8       as BU     (toString)
+import           Data.List                            (isPrefixOf, isInfixOf)
+import           Data.Time                            (getCurrentTime)
+import           Network.HTTP.Simple                  (Request,
+                                                       parseRequest,
+                                                       setRequestMethod,
+                                                       setRequestHeaders,
+                                                       setRequestBodyLBS,
+                                                       httpLBS,
+                                                       getResponseBody)
+import           Network.HTTP.Types.Header  as HTypes (Header, hDate, hContentMD5)
 import           APIAuth
 import           CommandParsing
 import           TimeUtils
@@ -42,7 +47,7 @@ fixUrl url
 getBody :: String -> IO String
 getBody x = body
   where
-    body | startswith "@" x = readFile . dropWhile (== '@') $ x
+    body | isPrefixOf "@" x = readFile . dropWhile (== '@') $ x
          | otherwise        = return x
 
 makeRequest :: String -> String -> String -> String -> [HTypes.Header] -> String -> Bool -> IO Request
@@ -53,7 +58,8 @@ makeRequest httpMethod url client key headers body pretty = do
   request'          <- parseRequest $ httpMethod ++ " " ++ url'
   body'             <- getBody body
 
-  let timestamp      = httpTime currentTime
+  let
+      timestamp      = httpTime currentTime
       contentMD5     = md5Digest body'
       canonical      = canonicalForm httpMethod
                                      (findHeader "Content-Type" headers)
@@ -78,7 +84,7 @@ makeRequest httpMethod url client key headers body pretty = do
 send :: String -> String -> String -> String -> [HTypes.Header] -> String -> Bool -> IO String
 send httpMethod url client key headers body pretty = do
   request  <- makeRequest httpMethod url client key headers body pretty
-  response <- httpLbs request
+  response <- httpLBS request
 
   let responseBody = getResponseBody response
       ppJson       = encodePretty (decode responseBody :: Maybe Value)
