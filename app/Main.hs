@@ -36,7 +36,7 @@ processRequest args = do
 
 help = "Usage: photon [args] [URL]\n"
     ++ "--version:  Version.\n"
-    ++ "--accessid: Access ID used for authentication.\n"
+    ++ "--client:   Access ID used for authentication.\n"
     ++ "--key:      Secret key used for authentication.\n"
     ++ " -X:        HTTP verb. Default is GET.\n"
     ++ " -d:        Data to send with the request. To include file contents, pass @ as the first character, followed by a file path.\n"
