@@ -3,9 +3,8 @@
 module Main where
 
 import Photon
-import Data.String.Utils
-import System.Environment
-import System.Exit
+import Data.List          (isPrefixOf)
+import System.Environment (getArgs)
 
 main = do
   args <- getArgs
@@ -15,9 +14,10 @@ main = do
 
 validate x
   | length x < 1              = Just "You didn't provide any arguments. Try: photon [URL]"
-  | (parseBool "--help" x)    = Just help
+  | (parseBool "--help"    x) = Just help
   | (parseBool "--version" x) = Just versionInfo
-  | startswith "-" (last x)   = Just ("\"" ++ (last x) ++ "\" is invalid. The last argument must be a URL.")
+  | (parseBool "-V"        x) = Just versionInfo
+  | "-" `isPrefixOf` (last x) = Just ("\"" ++ (last x) ++ "\" is invalid. The last argument must be a URL.")
   | otherwise                 = Nothing
 
 processRequest args = do
@@ -35,9 +35,9 @@ processRequest args = do
   putStrLn response
 
 help = "Usage: photon [args] [URL]\n"
-    ++ "--version:  Version.\n"
-    ++ "--client:   Access ID used for authentication.\n"
-    ++ "--key:      Secret key used for authentication.\n"
-    ++ " -X:        HTTP verb. Default is GET.\n"
-    ++ " -d:        Data to send with the request. To include file contents, pass @ as the first character, followed by a file path.\n"
-    ++ " -H:        Specify request headers. For example: -H \"x-custom-header: somevalue\""
+    ++ "--version -V:  Version.\n"
+    ++ "--client:      Access ID used for authentication.\n"
+    ++ "--key:         Secret key used for authentication.\n"
+    ++ " -X:           HTTP verb. Default is GET.\n"
+    ++ " -d:           Data to send with the request. To include file contents, pass @ as the first character, followed by a file path.\n"
+    ++ " -H:           Specify request headers. For example: -H \"x-custom-header: somevalue\""
