@@ -21,14 +21,17 @@ import qualified Data.ByteString.Lazy.Char8 as BL8    (pack, toStrict)
 import qualified Data.ByteString.UTF8       as BU     (toString)
 import           Data.List                            (isPrefixOf, isInfixOf)
 import           Data.Time                            (getCurrentTime)
-import           Network.HTTP.Simple                  (Request,
-                                                       parseRequest,
-                                                       setRequestMethod,
-                                                       setRequestHeaders,
-                                                       setRequestBodyLBS,
-                                                       httpLBS,
-                                                       getResponseBody)
-import           Network.HTTP.Types.Header  as HTypes (Header, hDate, hContentMD5)
+import           Network.HTTP.Simple                  (Request
+                                                      ,parseRequest
+                                                      ,setRequestMethod
+                                                      ,setRequestHeaders
+                                                      ,setRequestBodyLBS
+                                                      ,httpLBS
+                                                      ,getResponseBody)
+import           Network.HTTP.Types.Header  as HTypes (Header
+                                                      ,hAuthorization
+                                                      ,hDate
+                                                      ,hContentMD5)
 import           APIAuth
 import           CommandParsing
 import           TimeUtils
@@ -49,6 +52,9 @@ getBody x = body
   where
     body | isPrefixOf "@" x = readFile . dropWhile (== '@') $ x
          | otherwise        = return x
+
+authHeader :: String -> String -> String -> HTypes.Header
+authHeader client key canonical = (HTypes.hAuthorization, B8.pack $ apiAuth client key canonical)
 
 makeRequest :: String -> String -> String -> String -> [HTypes.Header] -> String -> Bool -> IO Request
 makeRequest httpMethod url client key headers body pretty = do
