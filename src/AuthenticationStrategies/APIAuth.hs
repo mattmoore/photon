@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module APIAuth
+module AuthenticationStrategies.APIAuth
 ( apiAuth
 , canonicalForm
 , digest

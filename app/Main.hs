@@ -21,17 +21,18 @@ validate x
   | otherwise                 = Nothing
 
 processRequest args = do
-  let url     = parseArgsUrl         args
-      client  = parse "--client"     args
-      key     = parse "--key"        args
-      method' = parse "-X"           args
-      method  | method' == "" = "GET"
-              | otherwise     = method'
-      headers = parseHeaders         args
-      body    = parse "-d"           args
-      pretty  = parseBool "--pretty" args
+  let url       = parseArgsUrl         args
+      client    = parse "--client"     args
+      key       = parse "--key"        args
+      jwtClaims = parse "--claims"     args
+      method'   = parse "-X"           args
+      method    | method' == "" = "GET"
+                | otherwise     = method'
+      headers   = parseHeaders         args
+      body      = parse "-d"           args
+      pretty    = parseBool "--pretty" args
 
-  response <- send method url client key headers body pretty
+  response <- send method url client key jwtClaims headers body pretty
   putStrLn response
 
 help = "Usage: photon [args] [URL]\n"

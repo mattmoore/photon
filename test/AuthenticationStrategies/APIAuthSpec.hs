@@ -1,9 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module APIAuthSpec where
+module AuthenticationStrategies.APIAuthSpec where
 
 import Test.Hspec
-import APIAuth
+import AuthenticationStrategies.APIAuth
 import Data.Time
 
 main :: IO ()
