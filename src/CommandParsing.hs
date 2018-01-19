@@ -32,7 +32,7 @@ parseList key args
   | otherwise     = []
 
 parseArgsUrl :: [String] -> String
-parseArgsUrl x = last x
+parseArgsUrl = last
 
 parseHeader :: String -> HTypes.Header
 parseHeader x = (hHdrCustom, value)
@@ -40,10 +40,7 @@ parseHeader x = (hHdrCustom, value)
     name = takeWhile (/= ':') x
     hHdrCustom :: HTypes.HeaderName
     hHdrCustom = CI.mk . B8.pack $ name
-    value = B8.pack
-          . T.unpack
-          . T.strip
-          $ T.dropWhile (== ':') (T.dropWhile (/= ':') (T.pack x))
+    value = B8.pack . T.unpack . T.strip $ T.dropWhile (== ':') (T.dropWhile (/= ':') (T.pack x))
 
 parseHeaders :: [String] -> [HTypes.Header]
 parseHeaders x = map parseHeader (parseList "-H" x)
