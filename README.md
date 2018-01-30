@@ -1,6 +1,28 @@
 # Photon
 
-Photon is a command-line client utility, written in Haskell, similar to curl that also integrates API-Auth authentication for RESTable API endpoints.
+A CURL-like command-line utility written in Haskell. Supports JWT-RSA and API-Auth authentication.
+
+## Usage
+
+API Auth:
+
+```shell
+photon -X GET --client clientid --key thekey -H "x-custom-header-1: 1" -H "x-custom-header-2: blah" http://somesite.com
+```
+
+JWT-RSA Auth:
+
+```shell
+photon --key "@path_to_key.pem" --claims '{"sub": "customer:1"}' http://somesite.com
+```
+
+If you don't specify the protocol ("http://"), photon will assume "http".
+
+Likewise, if you don't specify the verb ("-X GET"), photon will assume you mean "GET".
+
+```shell
+photon somesite.com
+```
 
 ## Installation
 
@@ -63,26 +85,4 @@ sudo dnf remove -y photon
 sudo zypper in ./photon-0.1.11-1.fc26.x86_64.rpm
 # Uninstall
 sudo zypper remove photon
-```
-
-## Usage
-
-API Auth:
-
-```shell
-photon -X GET --client clientid --key thekey -H "x-custom-header-1: 1" -H "x-custom-header-2: blah" http://somesite.com
-```
-
-JWT-RSA Auth:
-
-```shell
-photon --key "@path_to_key.pem" --claims '{"sub": "customer:1"}' http://somesite.com
-```
-
-If you don't specify the protocol ("http://"), photon will assume "http".
-
-Likewise, if you don't specify the verb ("-X GET"), photon will assume you mean "GET".
-
-```shell
-photon somesite.com
 ```
