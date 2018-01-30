@@ -30,7 +30,7 @@ jwtAuth key claims = do
 readPrivateKeyStore :: FilePath -> IO [X509.PrivKey]
 readPrivateKeyStore file = do
   keyStore <- Data.X509.File.readKeyFile file
-  return $ keyStore
+  return keyStore
 
 privateKey :: [X509.PrivKey] -> PrivateKey
 privateKey keys = key
@@ -45,4 +45,8 @@ readCertificateStore file = do
     Nothing   -> Nothing
 
 publicKey :: X509CertStore.CertificateStore -> X509.PubKey
-publicKey = X509.certPubKey . X509.getCertificate . head . X509CertStore.listCertificates
+publicKey =
+  X509CertStore.listCertificates
+  >>> head
+  >>> X509.getCertificate
+  >>> X509.certPubKey
