@@ -44,7 +44,7 @@ import           TimeUtils
 versionInfo :: String
 versionInfo = "photon " ++ showVersion version ++ "\n"
            ++ "Protocols: http https\n"
-           ++ "Features: Api-Auth SSL"
+           ++ "Features: API-Auth JWT-RSA SSL"
 
 fixUrl :: String -> String
 fixUrl url
