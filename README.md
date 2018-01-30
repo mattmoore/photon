@@ -67,8 +67,16 @@ sudo zypper remove photon
 
 ## Usage
 
+API Auth:
+
 ```shell
 photon -X GET --client clientid --key thekey -H "x-custom-header-1: 1" -H "x-custom-header-2: blah" http://somesite.com
+```
+
+JWT-RSA Auth:
+
+```shell
+photon --key "@path_to_key.pem" --claims '{"sub": "customer:1"}' http://somesite.com
 ```
 
 If you don't specify the protocol ("http://"), photon will assume "http".
