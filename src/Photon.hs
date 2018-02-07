@@ -71,7 +71,8 @@ jwtHeader :: String -> String -> IO HTypes.Header
 jwtHeader key claims = do
   keyStore <- readPrivateKeyStore (tail key)
   jwtEncoded <- jwtAuth (privateKey keyStore) (UTF8.fromString claims)
-  return (HTypes.hAuthorization, jwtEncoded)
+  let bearer = UTF8.fromString ("Bearer " ++ (UTF8.toString jwtEncoded))
+  return (HTypes.hAuthorization, bearer)
 
 makeRequest :: String -> String -> String -> String -> String -> [HTypes.Header] -> String -> Bool -> IO Request
 makeRequest httpMethod url client key jwtClaims headers body pretty = do
