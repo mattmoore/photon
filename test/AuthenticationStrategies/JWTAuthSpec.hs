@@ -9,9 +9,6 @@ import Data.X509
 import Data.X509.File
 import qualified Data.X509.CertificateStore as X509CertStore
 
-main :: IO ()
-main = hspec spec
-
 spec :: Spec
 spec = do
 

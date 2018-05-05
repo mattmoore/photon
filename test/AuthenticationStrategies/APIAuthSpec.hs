@@ -6,9 +6,6 @@ import Test.Hspec
 import AuthenticationStrategies.APIAuth
 import Data.Time
 
-main :: IO ()
-main = hspec spec
-
 spec :: Spec
 spec = do
 

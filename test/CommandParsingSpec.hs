@@ -6,9 +6,6 @@ import Test.Hspec
 import CommandParsing
 import Network.HTTP.Types.Header
 
-main :: IO ()
-main = hspec spec
-
 spec :: Spec
 spec = do
 

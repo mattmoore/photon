@@ -6,9 +6,6 @@ import Test.Hspec
 import TimeUtils
 import Data.Time
 
-main :: IO ()
-main = hspec spec
-
 spec :: Spec
 spec = do
 
