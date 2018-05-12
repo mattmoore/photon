@@ -1,0 +1,76 @@
+name:                photon
+version:             0.1.12
+github:              "mattmoore/photon"
+license:             MIT
+author:              "Matt Moore"
+maintainer:          "mattmoore@carbonhelix.com"
+copyright:           "2018 Matt Moore"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/mattmoore/photon#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+  other-modules: Paths_photon
+  dependencies:
+  - http-conduit
+  - http-types
+  - bytestring
+  - utf8-string
+  - case-insensitive
+  - SHA
+  - pureMD5
+  - base64-bytestring
+  - time
+  - text
+  - aeson
+  - aeson-pretty
+  - x509
+  - x509-store
+  - cryptonite
+  - jose-jwt
+
+executables:
+  photon-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - photon
+
+tests:
+  photon-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - photon
+    - bytestring
+    - http-types
+    - hspec
+    - hspec-discover
+    - time
+    - SHA
+    - x509
+    - x509-store
+    - cryptonite
+    - jose-jwt
