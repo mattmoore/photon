@@ -1,8 +1,10 @@
--- This file has been generated from package.yaml by hpack version 0.28.2.
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: bad75c08895f457d19ddc730b604f5304e559406e8333884d7671486a3da2261
+-- hash: 5a9fadc1016bdef92bf7e0fba2623cc9a92ff47a2170be40538ef707070d1afa
 
 name:           photon
 version:        0.1.12
@@ -15,10 +17,9 @@ copyright:      2018 Matt Moore
 license:        MIT
 license-file:   LICENSE
 build-type:     Simple
-cabal-version:  >= 1.10
 extra-source-files:
-    ChangeLog.md
     README.md
+    ChangeLog.md
 
 source-repository head
   type: git
